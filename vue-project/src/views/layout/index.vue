@@ -7,3 +7,10 @@
     </el-container>
   </el-container>
 </template>
+<script>
+  export default {
+      conponent: {
+
+      }
+  }
+</script>

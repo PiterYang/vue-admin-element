@@ -1,6 +1,6 @@
 import {loginByUsername} from '@/api/login'
 import {setToken,getToken} from '@/utils/auth'
-
+import axios from 'axios'
 const user = {
   state: {
     'token': getToken()
@@ -22,6 +22,16 @@ const user = {
         }).catch(error => {
           reject(error)
         })
+        /*axios.post('http://localhost:3000/login/login', {
+          firstName: 'Fred',
+          lastName: 'Flintstone'
+        })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });*/
       })
     }
   }

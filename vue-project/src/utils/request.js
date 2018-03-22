@@ -20,6 +20,7 @@ service.interceptors.request.use(config=>{
 
 service.interceptors.response.use(response=>response, error=>{
   console.log('err'+error)
+  console.log(1111111111)
   Message({
     type: 'error',
     message:error.message,

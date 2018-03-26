@@ -1,14 +1,18 @@
-import {loginByUsername} from '@/api/login'
+import {loginByUsername,getUserInfo} from '@/api/login'
 import {setToken,getToken} from '@/utils/auth'
 import axios from 'axios'
 const user = {
   state: {
-    'token': getToken()
+    'token': getToken(),
+    'roles': []
   },
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token
     },
+    SET_ROLES: (state, roles) => {
+      state.roles = roles
+    }
   },
   actions: {
     LoginByUsername({commit}, userInfo) {
@@ -32,6 +36,23 @@ const user = {
           .catch(function (error) {
             console.log(error);
           });*/
+      })
+    },
+    getUserInfo({commit, state}) {
+      return new Promise((resolve, reject)=>{
+        getUserInfo(state.token).then((res)=>{
+          console.log('store res',res)
+          commit('SET_ROLES',res.data.roles)
+          resolve(res)
+        }).catch((err) => {
+          reject(err)
+        })
+      })
+    },
+    FedLogOut({commit, state}) {
+      return new Promise((resolve,reject)=>{
+        commit('SET_TOKEN', '')
+        resolve()
       })
     }
   }

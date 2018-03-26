@@ -11,3 +11,14 @@ export function loginByUsername(username, password) {
     data
   })
 }
+
+export function getUserInfo(token) {
+  const data = {
+    token
+  }
+  return request({
+    url: 'getUserInfo',
+    method: 'post',
+    data
+  })
+}

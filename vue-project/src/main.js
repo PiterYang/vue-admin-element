@@ -19,6 +19,8 @@ import './icons' // icon
 // import * as filters from './filters' // global filters
 import i18n from './lang' // Internationalization
 import * as filters from './filters' // global filters
+import './permission'
+
 Vue.use(Element, {
   size: 'medium', // set element-ui default size
   i18n: (key, value) => i18n.t(key, value)

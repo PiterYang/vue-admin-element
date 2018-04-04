@@ -23,6 +23,7 @@ export const publicRouter = [
       {
         path: 'workSpace/index',
         component: _import_('workSpace/index'),
+        name: 'workSpaceIndex',
         meta: {
           title: 'workSpace'
         }

@@ -5,7 +5,8 @@ const app = {
     sidebar: {
       opened: !+Cookies.get('sidebarStatus')
     },
-    language: Cookies.get('language') || 'en'
+    language: Cookies.get('language') || 'en',
+    sidebarSwitch: false
   },
   mutations: {
     TOGGLE_SIDEBAR: state => {
@@ -19,6 +20,10 @@ const app = {
     SET_LANGUAGE: (state, language) => {
       state.language = language
       Cookies.set('language', language)
+    },
+    SWITCH_SIDEBAR: (state) => {
+      state.sidebarSwitch = !state.sidebarSwitch
+      console.log(state.sidebarSwitch)
     }
   },
   actions: {
@@ -27,6 +32,10 @@ const app = {
     },
     setLanguage({ commit }, language) {
       commit('SET_LANGUAGE', language)
+    }
+    ,switchSidebar({commit}) {
+      console.log(2222)
+      commit('SWITCH_SIDEBAR')
     }
   }
 }

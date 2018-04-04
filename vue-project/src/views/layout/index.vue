@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-aside width="200px">
+    <el-aside width="auto">
       <navbar></navbar>
     </el-aside>
     <el-container>
@@ -25,3 +25,8 @@
     }
   }
 </script>
+<style rel="stylesheet/scss" lang="scss" scoped>
+  .el-header{
+    padding: 0 5px;
+  }
+</style>

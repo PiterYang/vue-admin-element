@@ -16,32 +16,36 @@ function hasPermission(roles, permissionRoles) {
 }
 
 router.beforeEach((to, from, next) => {
+  console.log('token', getToken())
   if (getToken()) {
     if(to.path == '/login') {
-      next({path: '/'})
+      next('/')
     } else {
+      console.log('roles', store.getters.roles)
       if(store.getters.roles.length == 0) {
         store.dispatch('getUserInfo').then(res => {
-          console.log(33333333)
-          console.log(res)
-          console.log(222222)
-          const roles = res.data.roles
-          store.dispatch('GenerateRoutes', {roles}).then(res => {
-            console.log(store.getters)
-            router.addRoutes(store.getters.addRouters)
-            console.log(store.getters.permission_routers)
-            console.log({...to})
-            next({...to})
-          })
+          if(res.data.status == 1) {
+            const roles = res.data.roles
+            store.dispatch('GenerateRoutes', {roles}).then(res => {
+              router.addRoutes(store.getters.addRouters)
+              next({...to})
+            })
+          } else if (res.data.status == 2) {
+            store.dispatch('FedLogOut').then(() => {
+              Message.error('login timeout please login again')
+            })
+            next('/login')
+          }
+
         }).catch(err => {
           store.dispatch('FedLogOut').then(() => {
-            console.log(err)
+            console.log('FedLogOut')
             Message.error('you have no permission please login again')
-            next({path: '/login'})
+            next('/login')
           })
         })
       } else {
-        if(hasPermission(store.getters.roles, to.meta.role)) {
+        if(hasPermission(store.getters.roles, to.meta.roles)) {
           next()
         } else {
           next({path: '/401'})
@@ -49,7 +53,7 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else {
-    console.log(3333)
-    next({path: '/login'})
+    next()
+    next('/login')
   }
 })

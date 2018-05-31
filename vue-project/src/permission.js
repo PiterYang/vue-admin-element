@@ -16,12 +16,10 @@ function hasPermission(roles, permissionRoles) {
 }
 
 router.beforeEach((to, from, next) => {
-  console.log('token', getToken())
   if (getToken()) {
     if(to.path == '/login') {
       next('/')
     } else {
-      console.log('roles', store.getters.roles)
       if(store.getters.roles.length == 0) {
         store.dispatch('getUserInfo').then(res => {
           if(res.data.status == 1) {
@@ -39,7 +37,6 @@ router.beforeEach((to, from, next) => {
 
         }).catch(err => {
           store.dispatch('FedLogOut').then(() => {
-            console.log('FedLogOut')
             Message.error('you have no permission please login again')
             next('/login')
           })

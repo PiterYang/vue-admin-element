@@ -23,7 +23,6 @@ const app = {
     },
     SWITCH_SIDEBAR: (state) => {
       state.sidebarSwitch = !state.sidebarSwitch
-      console.log(state.sidebarSwitch)
     }
   },
   actions: {
@@ -34,7 +33,6 @@ const app = {
       commit('SET_LANGUAGE', language)
     }
     ,switchSidebar({commit}) {
-      console.log(2222)
       commit('SWITCH_SIDEBAR')
     }
   }

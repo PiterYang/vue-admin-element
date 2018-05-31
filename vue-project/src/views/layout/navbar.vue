@@ -4,20 +4,20 @@
       <template v-for="item in permission_routers" v-if="item.children">
         <router-link v-if="item.children.length==1" :to="item.path + '/' + item.children[0].path" :key="item.children[0].name">
           <el-menu-item :index="item.path + '/' + item.children[0].path">
-            <i class="el-icon-menu"></i>
+            <svg-icon class="svgStyle" v-if="item.children[0].meta&&item.children[0].meta.icon" :icon-class="item.children[0].meta.icon"></svg-icon>
             <span slot="title">{{item.children[0].meta.title}}</span>
           </el-menu-item>
         </router-link>
         <template v-else>
           <el-submenu :index="item.name||item.path" :key="item.name">
             <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>{{item.children[0].meta.title}}</span>
+              <svg-icon class="svgStyle" v-if="item.meta&&item.meta.icon" :icon-class="item.meta.icon"></svg-icon>
+              <span>{{item.meta.title}}</span>
             </template>
             <template v-for="child in item.children">
               <router-link :to="item.path+'/'+child.path" :key="child.name">
                 <el-menu-item :index="item.path+'/'+child.path" >
-                  <i class="el-icon-location"></i>
+                  <svg-icon class="svgStyle" v-if="child.meta&&child.meta.icon" :icon-class="child.meta.icon"></svg-icon>
                   <span>{{child.meta.title}}</span>
                 </el-menu-item>
               </router-link>
@@ -31,8 +31,9 @@
 <style>
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
-    min-height: 400px;
+    min-height: 770px;
   }
+
 </style>
 
 <script>
@@ -52,14 +53,10 @@
     },
     methods: {
       handleOpen(key, keyPath) {
-        console.log(key, keyPath);
       },
       handleClose(key, keyPath) {
-        console.log(key, keyPath);
       },
       hasSelect(index, indexPath) {
-        console.log('index', index)
-        console.log('indexpath', indexPath)
       }
     }
   }

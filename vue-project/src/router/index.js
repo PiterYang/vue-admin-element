@@ -25,7 +25,8 @@ export const publicRouter = [
         component: _import_('workSpace/index'),
         name: 'workSpaceIndex',
         meta: {
-          title: 'workSpace'
+          title: 'workSpace',
+          icon: 'menu'
         }
       }
     ]
@@ -41,13 +42,18 @@ export const differertRouter = [
     path: '/roleManage',
     name: 'roleManage',
     component: layout,
+    meta: {
+      icon: 'roleManage',
+      title: 'roleManage'
+    },
     children: [
       {
         path: 'roleList',
         name: 'roleList',
         component: _import_('roleManage/roleList'),
         meta: {
-          title: 'roleList'
+          title: 'roleList',
+          icon: 'roleList'
         }
       },
       {
@@ -55,7 +61,8 @@ export const differertRouter = [
         name: 'roleEdit',
         component: _import_('roleManage/roleEdit'),
         meta: {
-          title: 'roleEdit'
+          title: 'roleEdit',
+          icon: 'roleEdit'
         }
       }
     ]
@@ -64,13 +71,18 @@ export const differertRouter = [
     path: '/productList',
     name: 'productList',
     component: layout,
+    meta:{
+      icon: 'product',
+      title: 'product'
+    },
     children: [
       {
         path: 'addProduct',
         name: 'addProduct',
         component: _import_('product/productList'),
         meta: {
-          title: 'productList'
+          title: 'productList',
+          icon: 'productList'
         }
       },
       {
@@ -78,7 +90,8 @@ export const differertRouter = [
         name: 'editProduct',
         component: _import_('product/productEdit'),
         meta:{
-          title: 'productEdit'
+          title: 'productEdit',
+          icon: 'productEdit'
         }
       }
     ]

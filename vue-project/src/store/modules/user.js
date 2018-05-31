@@ -1,10 +1,12 @@
 import {loginByUsername,getUserInfo} from '@/api/login'
 import {setToken,getToken,removeToken} from '@/utils/auth'
+import {Message} from 'element-ui'
 import axios from 'axios'
 const user = {
   state: {
     'token': getToken(),
     'roles': [],
+    'username': ''
 
   },
   mutations: {
@@ -21,9 +23,15 @@ const user = {
       return new Promise((resolve, reject) => {
         loginByUsername(username, userInfo.password).then(response => {
           const data = response.data
-          commit('SET_TOKEN', data.token)
-          setToken(response.data.token)
-          resolve()
+          if(data.status == 1) {
+            commit('SET_TOKEN', data.token)
+            setToken(response.data.token)
+            resolve()
+          } else {
+            Message.error(data.msg)
+            reject(data.msg)
+          }
+
         }).catch(error => {
           reject(error)
         })
@@ -43,7 +51,6 @@ const user = {
       return new Promise((resolve, reject)=>{
         getUserInfo(state.token).then((res)=>{
           if(res.data.status == 1) {
-            console.log('store res',res)
             commit('SET_ROLES',res.data.roles)
           }
           resolve(res)

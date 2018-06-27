@@ -22,6 +22,8 @@ const app = {
       Cookies.set('language', language)
     },
     SWITCH_SIDEBAR: (state) => {
+      console.log(111)
+      console.log(state.sidebarSwitch)
       state.sidebarSwitch = !state.sidebarSwitch
     }
   },
